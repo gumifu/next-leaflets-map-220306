@@ -76,6 +76,6 @@ export default function Home() {
   )
 }
 
-export async function getStaticProps() {
-  const exploreData = await fetch('https://next-leaflets-map.vercel.app');
-}
+// export async function getStaticProps() {
+//   const exploreData = await fetch('https://next-leaflets-map.vercel.app');
+// }
