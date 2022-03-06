@@ -1,9 +1,10 @@
 import Head from 'next/head'
 import Banner from '../components/Banner'
 import Header from '../components/Header'
+import MediumCard from '../components/MediumCard';
 import SmallCard from '../components/SmallCard';
 
-export default function Home({exploreData}) {
+export default function Home({exploreData,cardsData}) {
   return (
     <div>
       <Head>
@@ -12,74 +13,39 @@ export default function Home({exploreData}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {/* Header */}
-      <Header/>
+      <Header />
       {/* Banner */}
       <Banner />
 
-      <main className='max-w-7xl mx-auto px-8 sm:px-16'>
-        <section className='pt-6'>
+      <main className="max-w-7xl mx-auto px-8 sm:px-16">
+        <section className="pt-6">
           <h2 className="text-4xl font-semibold pb-5">近くを探す</h2>
           {/* items */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-col-3 xl:grid-cols-4 ">
-            {exploreData?.map(({img, distance, location}) => (
-              <SmallCard key={img} img={img} distance={distance} location={location}/>
+            {exploreData?.map(({ img, distance, location }) => (
+              <SmallCard
+                key={img}
+                img={img}
+                distance={distance}
+                location={location}
+              />
+            ))}
+          </div>
+        </section>
+        <section>
+          <h2 className="text-4xl font-semibold py-8">
+            次に行く旅のアイディアを見つけよう
+          </h2>
+
+          <div className="flex space-x-3 overflow-x-scroll scrollbar-hide p-3 -ml-3">
+            {cardsData?.map(({ img, title }) => (
+              <MediumCard key={img} img={img} title={title} />
             ))}
           </div>
         </section>
       </main>
-
-      {/* <main className={styles.main}>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer> */}
     </div>
-  )
+  );
 }
 
 export async function getStaticProps() {
@@ -89,9 +55,13 @@ export async function getStaticProps() {
     (res) => res.json()
   );
 
+  const cardsData = await fetch('https://links.papareact.com/zp1')
+    .then(res=>res.json());
+
   return {
     props: {
-      exploreData
+      exploreData,
+      cardsData
     }
   }
 }
