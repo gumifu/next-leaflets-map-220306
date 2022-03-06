@@ -11,12 +11,12 @@ const Banner = () => {
         objectFit="cover"
       />
       <div className=" absolute top-1/3 w-full text-center">
-        <p className="text-5xl sm:text-3xl font-bold text-gray-300">
-          好奇心のおもむくままに
-        </p>
         <button className="text-blue-00 bg-white px-10 py-4 shadow-xl rounded-full font-bold my-3 hover:shadow-2xl active:scale-90 transition duration-150">
           柔軟な検索
         </button>
+        {/* <p className="text-xl sm:text-2xl font-bold text-gray-200">
+          好奇心のおもむくままに
+        </p> */}
       </div>
     </div>
   );
