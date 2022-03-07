@@ -37,7 +37,8 @@ export default function Home({exploreData,cardsData}) {
             次に行く旅のアイディアを見つけよう
           </h2>
 
-          <div className="flex space-x-3 overflow-x-scroll scrollbar-hide p-3 -ml-3">
+          <div className="flex space-x-3 overflow-x-auto scrollbar-hide p-3 -ml-3">
+            {/* //scrollbar-hide */}
             {cardsData?.map(({ img, title }) => (
               <MediumCard key={img} img={img} title={title} />
             ))}
